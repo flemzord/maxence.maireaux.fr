@@ -1,6 +1,18 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import siteConfig from '@/site-config'
+import { getCollection } from 'astro:content'
+
+const posts = (await getCollection('blog'))
+  .map(post => ({
+    ...post,
+    data: {
+      ...post.data,
+      date: new Date(post.data.date),
+    },
+  }))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3)
 ---
 
 <BaseLayout description={siteConfig.description}>
@@ -36,4 +48,25 @@ import siteConfig from '@/site-config'
       </a>.
     </p>
   </article>
+
+  <section class="mt-12 prose">
+    <h2>Latest Posts in French</h2>
+    <ul>
+      {posts.map(post => (
+        <li>
+          <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            {post.data.date.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </p>
+        </li>
+      ))}
+    </ul>
+    <p>
+      <a href="/blog/">View all posts &rarr;</a>
+    </p>
+  </section>
 </BaseLayout>
