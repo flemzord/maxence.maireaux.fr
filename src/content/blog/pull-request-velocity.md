@@ -1,7 +1,7 @@
 ---
 title: "Pull Requests: Le levier caché de la vélocité des équipes d'ingénierie"
 description: "Découvrez comment la gestion efficace des Pull Requests peut considérablement accélérer la livraison de code, améliorer la qualité et renforcer la motivation des équipes d'ingénierie. Cet article présente des stratégies concrètes pour optimiser votre processus de revue de code."
-date: 2025-05-17
+date: 2025-04-12
 ---
 > "Votre pipeline de déploiement n'est jamais plus rapide que votre pull request la plus lente."
 
