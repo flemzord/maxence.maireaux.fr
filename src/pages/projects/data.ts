@@ -1,6 +1,18 @@
 import type { ProjectData } from '@/types'
 
 export const projectData: ProjectData = [
+
+  {
+    title: 'Current Projects',
+    projects: [
+      {
+        text: 'Sweady',
+        description: 'Sweady integrates GitHub & Slack with smart, contextual workflows to eliminate review bottlenecks and help your team merge faster. It cuts notification noise, slashes review wait time, resolves issues faster with focused channels, and automates assignments & reminders.',
+        icon: 'i-carbon-rocket',
+        href: 'https://sweady.co',
+      },
+    ],
+  },
   {
     title: 'Project Sold',
     projects: [
@@ -11,7 +23,7 @@ export const projectData: ProjectData = [
         href: 'https://www.myteslamate.com/',
       },
     ],
-  },
+  }
   // {
   //   title: 'OSS Project',
   //   projects: [
