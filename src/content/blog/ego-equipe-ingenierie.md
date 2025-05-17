@@ -1,5 +1,5 @@
 ---
-title: "Trop d'ego tue la livraison : Comprendre et maîtriser l'ego dans les équipes d'ingénierie"
+title: "Comprendre et maîtriser l'ego dans les équipes d'ingénierie"
 description: "Comment la culture du héros freine la collaboration, la qualité et l'innovation — et quelles pratiques adopter pour replacer le collectif au centre."
 date: 2025-05-17
 ---
