@@ -19,6 +19,8 @@ Ma philosophie est simple : **comprendre avant d'agir**. Avant même d'écrire l
 
 Cette approche me permet d'avoir une vision claire du projet dès le départ et d'éviter de me perdre dans la complexité.
 
+
+
 ### Exemple concret : refonte d'une API legacy
 Récemment, j'ai demandé à l'IA de m'aider à refondre une API legacy de 5000 lignes. En moins de 10 minutes, elle m'a proposé :
 - Une architecture modulaire avec séparation des responsabilités
@@ -26,7 +28,22 @@ Récemment, j'ai demandé à l'IA de m'aider à refondre une API legacy de 5000 
 - Une documentation OpenAPI complète
 - Des suggestions d'optimisations de performance
 
-Un travail qui m'aurait pris plusieurs jours en solo !
+Pour illustrer le type de demande que je peux faire pour la documentation, voici un exemple de prompt pour générer une base pour un fichier `architecture.md` (que ce soit pour cette API refondue ou un nouveau projet) :
+
+```text
+You are a senior software engineer. Based on the current project files (source code, configs, documentation, etc.), generate a comprehensive `architecture.md` file in Markdown format, including the following sections:
+
+- System overview
+- Main technologies (languages, frameworks, databases, third-party tools, etc.)
+- Component breakdown (frontend, backend, APIs, background workers, etc.)
+- Data flows and API design
+- Security (authentication, authorization, best practices)
+- Missing or inconsistent pieces
+
+If any required information is missing from the project, ask me clear follow-up questions before completing the final version of the file.
+```
+
+Ce prompt me donne un excellent point de départ. Un travail qui m'aurait pris plusieurs heures en solo !
 
 ## 🔄 Le cycle Edit-Test : ma méthode de travail
 
@@ -119,4 +136,4 @@ L'IA a transformé ma façon de coder. Ce n'est plus une question de savoir si o
 
 La clé du succès ? **Rester critique et curieux**. L'IA est un outil puissant, mais c'est notre expertise qui fait la différence entre du code médiocre et du code excellent.
 
-**Et vous, quelle fonctionnalité IA a révolutionné votre façon de coder ? Partagez vos expériences en commentaire !**
+**Et vous, quelle fonctionnalité IA a révolutionné votre façon de coder ?**
