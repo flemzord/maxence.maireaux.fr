@@ -45,16 +45,19 @@ Le système repose sur quatre composants clés :
 Imaginons que vous voulez rediriger toutes les images Docker Hub vers votre registry interne. Vous créez simplement cette règle :
 
 ```yaml
-apiVersion: registry.flemzord.io/v1
+apiVersion: dev.flemzord.fr/v1alpha1
 kind: RegistryRewriteRule
 metadata:
-  name: docker-hub-to-internal
+  name: docker-hub-to-ecr
 spec:
-  from: "^docker\\.io/(.*)$"
-  to: "internal-registry.company.com/docker-hub/$1"
-  namespaces:
-    - production
-    - staging
+  rules:
+    # Redirect Docker Hub images to ECR pull-through cache
+    - match: '^docker\.io/(.*)'
+      replace: 'internal-registry.company.com/dockerhub/$1'
+    
+    # Handle images without explicit registry (defaults to docker.io)
+    - match: '^([^/]+/[^/]+)$'
+      replace: 'internal-registry.company.com/dockerhub/$1'
 ```
 
 Désormais, toute image comme `docker.io/nginx:latest` sera automatiquement réécrite en `internal-registry.company.com/docker-hub/nginx:latest`. Vos développeurs continuent à utiliser les URLs originales, le webhook s'occupe du reste.
@@ -71,16 +74,15 @@ Le système de règles est conçu pour être extrêmement flexible :
 Exemple avancé avec plusieurs registries :
 
 ```yaml
-apiVersion: registry.flemzord.io/v1
+apiVersion: dev.flemzord.fr/v1alpha1
 kind: RegistryRewriteRule
 metadata:
   name: multi-registry-routing
 spec:
-  from: "^(gcr\\.io|quay\\.io|ghcr\\.io)/(.*)$"
-  to: "cache.internal.com/$1/$2"
-  labelSelector:
-    matchLabels:
-      use-cache: "true"
+  rules:
+    - match: '^(gcr\\.io|quay\\.io|ghcr\\.io)/(.*)$'
+      replace: 'cache.internal.com/$1/$2'
+
 ```
 
 ## Performance et fiabilité
@@ -108,13 +110,6 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 kubectl apply -f https://raw.githubusercontent.com/flemzord/mutating-registry-webhook/main/dist/install.yaml
 ```
 
-Pour ceux qui préfèrent Helm :
-
-```bash
-helm repo add mutating-registry-webhook https://flemzord.github.io/mutating-registry-webhook
-helm install mutating-registry-webhook mutating-registry-webhook/mutating-registry-webhook
-```
-
 ## Cas d'usage réels
 
 ### 1. Pull-through cache d'entreprise
@@ -122,13 +117,14 @@ helm install mutating-registry-webhook mutating-registry-webhook/mutating-regist
 Réduisez drastiquement votre bande passante en redirigeant toutes les images externes vers votre cache interne :
 
 ```yaml
-apiVersion: registry.flemzord.io/v1
+apiVersion: dev.flemzord.fr/v1alpha1
 kind: RegistryRewriteRule
 metadata:
   name: enterprise-cache
 spec:
-  from: "^(?!internal-registry\\.)(.*)$"
-  to: "internal-registry.company.com/cache/$1"
+  rules:
+    - match: '^(?!internal-registry\\.)(.*)$'
+      replace: 'internal-registry.company.com/cache/$1'
 ```
 
 ### 2. Migration progressive
@@ -136,16 +132,16 @@ spec:
 Migrez progressivement d'un registry à un autre sans toucher au code :
 
 ```yaml
-apiVersion: registry.flemzord.io/v1
+apiVersion: dev.flemzord.fr/v1alpha1
 kind: RegistryRewriteRule
 metadata:
   name: gradual-migration
 spec:
-  from: "^old-registry\\.company\\.com/(.*)$"
-  to: "new-registry.company.com/$1"
-  namespaces:
-    - canary
-    - staging
+  rules:
+    - match: '^old-registry\\.company\\.com/(.*)$'
+      replace: 'new-registry.company.com/$1'
+      conditions:
+        namespaces: ['canary', 'staging']
 ```
 
 ### 3. Environnements isolés
@@ -153,15 +149,14 @@ spec:
 Créez des environnements complètement isolés avec leurs propres registries :
 
 ```yaml
-apiVersion: registry.flemzord.io/v1
+apiVersion: dev.flemzord.fr/v1alpha1
 kind: RegistryRewriteRule
 metadata:
   name: isolated-dev
 spec:
-  from: "^(.*)$"
-  to: "dev-registry.local/$1"
-  namespaces:
-    - development
+  rules:
+    - match: '^(.*)$'
+      replace: 'dev-registry.local/$1'
 ```
 
 ## Monitoring et observabilité
