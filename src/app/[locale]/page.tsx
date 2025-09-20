@@ -62,7 +62,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
                   width="200"
                   height="200"
                 />
-                <div className="hero-avatar-ring"></div>
               </div>
             </div>
           </div>
