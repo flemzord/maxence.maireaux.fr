@@ -64,7 +64,7 @@ const siteConfig: Site = {
   ],
   header: {
     logo: {
-      src: '/favicon.ico',
+      src: '/maxence.jpg',
       alt: 'Maxence Maireaux',
     },
   },

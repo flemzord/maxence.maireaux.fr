@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import ThemeToggle from './ThemeToggle';
 import siteConfig from '@/site-config';
 import { Locale, locales, languages } from '@/i18n';
 import { NavigationLink, SocialLink } from '@/types';
@@ -89,7 +88,7 @@ export default function Header({ locale }: HeaderProps) {
             <img
               width="28"
               height="28"
-              className="sm:w-8 sm:h-8"
+              className="sm:w-8 sm:h-8 rounded-full object-cover"
               src={siteConfig.header.logo.src}
               alt={siteConfig.header.logo.alt}
             />
@@ -148,7 +147,6 @@ export default function Header({ locale }: HeaderProps) {
           <Link href={`/${locale}/rss.xml`} className="container-link" aria-label="RSS Feed">
             <span className="i-ri-rss-line" />
           </Link>
-          <ThemeToggle />
         </div>
       </header>
 
@@ -164,6 +162,7 @@ export default function Header({ locale }: HeaderProps) {
             <img
               width="32"
               height="32"
+              className="rounded-full object-cover"
               src={siteConfig.header.logo.src}
               alt={siteConfig.header.logo.alt}
             />
