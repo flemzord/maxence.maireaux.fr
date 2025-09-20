@@ -54,7 +54,7 @@ export default function ThemeToggle() {
   // Prevent hydration mismatch
   if (!mounted) {
     return (
-      <button className="nav-link" aria-label="Toggle theme" disabled>
+      <button className="container-link" aria-label="Toggle theme" disabled>
         <span className="i-ri-computer-line opacity-50" />
       </button>
     );
@@ -63,8 +63,9 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="nav-link"
+      className="container-link focus-ring"
       aria-label={`Current theme: ${theme}. Click to cycle through themes.`}
+      title={`Current theme: ${theme}`}
     >
       <span className={icon} />
     </button>

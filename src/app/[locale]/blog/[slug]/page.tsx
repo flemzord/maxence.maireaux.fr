@@ -3,7 +3,7 @@ import { Locale } from '@/i18n';
 import { getPostBySlug, getAllPosts } from '@/lib/posts';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
-import rehypeHighlight from 'rehype-highlight';
+import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import { setRequestLocale } from 'next-intl/server';
 import { formatFullDate } from '@/lib/date';
@@ -40,18 +40,30 @@ export async function generateMetadata({
 
 const mdxComponents = {
   a: (props: any) => <a {...props} className="prose-link" />,
-  pre: (props: any) => (
-    <pre
-      {...props}
-      className="overflow-x-auto rounded-lg bg-gray-100 dark:bg-gray-900 p-4"
-    />
-  ),
-  code: (props: any) => (
-    <code
-      {...props}
-      className="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-900"
-    />
-  ),
+  pre: (props: any) => {
+    // Extract language from className (e.g., "language-javascript")
+    const language = props.className?.replace(/language-/, '') || 'text';
+    return (
+      <pre
+        {...props}
+        data-language={language}
+        className={props.className}
+      />
+    );
+  },
+  code: (props: any) => {
+    // Only style inline code, not code blocks
+    const isInline = !props.className?.includes('language-');
+    if (isInline) {
+      return (
+        <code
+          {...props}
+          className="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-900 text-sm"
+        />
+      );
+    }
+    return <code {...props} />;
+  },
 };
 
 interface BlogPostPageProps {
@@ -84,7 +96,7 @@ function PostContent({ post, locale }: { post: NonNullable<Awaited<ReturnType<ty
           components={mdxComponents}
           options={{
             mdxOptions: {
-              rehypePlugins: [rehypeHighlight, rehypeSlug],
+              rehypePlugins: [[rehypePrismPlus, { defaultLanguage: 'js', showLineNumbers: true }], rehypeSlug],
             },
           }}
         />

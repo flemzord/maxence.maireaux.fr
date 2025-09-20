@@ -24,40 +24,38 @@ export default async function HomePage({ params }: { params: Promise<{ locale: L
 
   return (
     <>
-      <section className="mb-16">
-        <h1 className="text-4xl font-bold mb-4">{t('title')}</h1>
-        <p className="text-xl opacity-70 mb-6">{t('subtitle')}</p>
-        <p className="text-lg mb-8">{t('description')}</p>
+      <section className="section-spacing">
+        <h1 className="text-display element-spacing">{t('title')}</h1>
+        <p className="text-subtitle element-spacing">{t('subtitle')}</p>
+        <p className="text-body mb-8 sm:mb-12">{t('description')}</p>
 
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-2">
-            <span className="opacity-70">{t('findMeOn')}</span>
-            <div className="flex gap-4">
-              {siteConfig.socialLinks.map((link) => (
-                <a
-                  key={link.text}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="nav-link"
-                  aria-label={link.text}
-                >
-                  <span className={link.icon}></span>
-                </a>
-              ))}
-            </div>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+          <span className="text-small opacity-70 font-medium">{t('findMeOn')}</span>
+          <div className="flex gap-3 flex-wrap">
+            {siteConfig.socialLinks.map((link) => (
+              <a
+                key={link.text}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="container-link"
+                aria-label={link.text}
+              >
+                <span className={link.icon}></span>
+              </a>
+            ))}
           </div>
-
         </div>
       </section>
 
       {latestPosts.length > 0 && (
         <section>
-          <h2 className="text-2xl font-bold mb-6">{t('latestPosts')}</h2>
+          <h2 className="text-title element-spacing">{t('latestPosts')}</h2>
           <PostList posts={latestPosts} locale={locale} />
-          <div className="mt-8">
-            <Link href={`/${locale}/blog`} className="prose-link">
+          <div className="mt-8 sm:mt-12">
+            <Link href={`/${locale}/blog`} className="button-primary inline-flex items-center gap-2">
               {t('viewAllPosts')}
+              <span className="i-ri-arrow-right-line" />
             </Link>
           </div>
         </section>

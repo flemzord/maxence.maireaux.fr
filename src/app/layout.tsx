@@ -1,5 +1,6 @@
 import '@unocss/reset/tailwind-compat.css';
 import '@/styles/globals.css';
+import '@/styles/prism.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Locale } from '@/i18n';
