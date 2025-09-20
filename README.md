@@ -1,105 +1,92 @@
-# Vitesse theme for Astro
+# maxence.maireaux.fr
 
-A minimal, SEO-friendly portfolio and blog theme for Astro, supports Vue and UnoCSS.
+Portfolio personnel et blog de Maxence Maireaux.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0624323a-339f-48da-8b28-03037d664c40/deploy-status)](https://app.netlify.com/sites/astro-theme-vitesse/deploys)
+## 🚀 Technologies
 
-## Preview
+- **Next.js 15** - Framework React avec App Router et export statique
+- **React 19** - Bibliothèque UI
+- **TypeScript** - Type safety
+- **UnoCSS** - Framework CSS atomique
+- **MDX** - Markdown enrichi avec support de composants
+- **next-intl** - Internationalisation (FR/EN)
 
-![Preview Image](./public/preview.jpg)
-
-## Features
-
-- 100 / 100 Lighthouse performance.
-- Responsive.
-- SEO-friendly.
-- Light / Dark Theme.
-- Markdown support.
-- <a target="_blank" href="https://mdxjs.com/">MDX</a> (components in your markdown) support.
-- <a target="_blank" href="https://vuejs.org/">Vue</a> SFC component support.
-- Auto generated sitemap and RSS Feed <a target="_blank" href="https://vueuse.org/">VueUse</a> & <a target="_blank" href="https://lodash.com/">Lodash</a> support.
-- Use the <a target="_blank" href="https://unocss.dev/">UnoCSS</a> for style, it's fast.
-
-## Lighthouse Performance
-
-![Lighthouse Performance Image](./public/lighthouse.jpg)
-
-## Quick Start
-
-[![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/kevinwong865/astro-theme-vitesse)
-
-Click this button, it will create a new repo for you that looks exactly like this one, and sets that repo up immediately for deployment on Netlify.
-
-If you  just want to develop locally, you can [create a repo](https://github.com/kevinwong865/astro-theme-vitesse/generate) from this template on GitHub.
-
-## Usage
-
-Just run and visit http://localhost:1977.
+## 📦 Installation
 
 ```bash
-npn run dev
+# Installer les dépendances
+pnpm install
 ```
 
-> Node.js version 18 or higher is required for this project.
-
-To build the App, you can run:
+## 🛠️ Développement
 
 ```bash
-npm run build
+# Lancer le serveur de développement (port 1977)
+pnpm dev
+
+# Lancer les tests de linting
+pnpm lint
+
+# Corriger automatiquement les problèmes de linting
+pnpm lint:fix
 ```
 
-You will then see the `dist` folder generated for publishing, which you can preview locally with the following command.
+## 🏗️ Build
 
 ```bash
-npm run preview
+# Créer le build de production
+pnpm build
+
+# Prévisualiser le build de production
+pnpm start
 ```
 
-## Use pnpm / yarn
+## 📁 Structure du projet
 
-If you want to use pnpm or yarn as a package management tool, please refer to the following steps.
-
-> If `preinstall` exists in `scripts`, remove it first.
-
-### pnpm
-
-Replace `"pre-commit": "npx lint-staged"` in package.json with `"pre-commit": "pnpm lint-staged"`.
-
-And replace `"*": "npm run lint:fix"` with `"*": "pnpm lint:fix"`.
-
-Like this:
-
-```json
-{
-  // ...
-  "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
-  },
-  "lint-staged": {
-    "*": "pnpm lint:fix"
-  }
-}
+```
+src/
+├── app/              # Routes Next.js App Router
+│   └── [locale]/     # Routes internationalisées
+├── components/       # Composants React
+├── content/          # Contenu du blog (Markdown/MDX)
+│   └── blog/
+│       ├── fr/       # Articles en français
+│       └── en/       # Articles en anglais
+├── messages/         # Fichiers de traduction
+│   ├── fr.json
+│   └── en.json
+├── styles/           # Styles globaux
+└── lib/              # Utilitaires et helpers
 ```
 
-### yarn
+## 🌍 Internationalisation
 
-Replace `"pre-commit": "npx lint-staged"` in package.json with `"pre-commit": "yarn lint-staged"`.
+Le site supporte deux langues :
+- **Français** (par défaut) : `/fr/`
+- **Anglais** : `/en/`
 
-And replace `"*": "npm run lint:fix"` with `"*": "yarn lint:fix"`.
+La détection automatique de la langue du navigateur redirige vers la version appropriée.
 
-Like this:
+## 📝 Écriture d'articles
 
-```json
-{
-  // ...
-  "simple-git-hooks": {
-    "pre-commit": "yarn lint-staged"
-  },
-  "lint-staged": {
-    "*": "yarn lint:fix"
-  }
-}
+Les articles de blog sont écrits en Markdown/MDX dans `/src/content/blog/{fr,en}/`.
+
+Format du frontmatter :
+```yaml
+---
+title: "Titre de l'article"
+date: "2025-01-20"
+description: "Description de l'article"
+tags: ["tag1", "tag2"]
+published: true
+translationKey: "unique-key"
+---
 ```
 
-## License
+## 🚀 Déploiement
 
-[MIT License](./LICENSE) © 2024 [Kieran Wong](https://github.com/kieranwong9865/)
+Le site génère un export statique dans le dossier `/out` qui peut être déployé sur n'importe quel hébergeur statique (Vercel, Netlify, GitHub Pages, etc.).
+
+## 📄 Licence
+
+© 2025 Maxence Maireaux

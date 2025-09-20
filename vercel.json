@@ -1,0 +1,17 @@
+{
+  "trailingSlash": true,
+  "rewrites": [
+    {
+      "source": "/blog/:path*/",
+      "destination": "/fr/blog/:path*/"
+    },
+    {
+      "source": "/projects/",
+      "destination": "/fr/projects/"
+    },
+    {
+      "source": "/rss.xml",
+      "destination": "/fr/rss.xml"
+    }
+  ]
+}

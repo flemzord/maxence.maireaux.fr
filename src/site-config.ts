@@ -1,13 +1,48 @@
-export const siteConfig = {
-  author: 'Maxence Maireaux',
-  title: 'Maxence Maireaux',
-  subtitle: 'Former Infra guy, Now VP of Engineering.',
-  description: 'Former Infra guy, Now VP of Engineering.',
-  image: {
-    src: '/hero.jpg',
-    alt: 'Website Main Image',
+interface SocialLink {
+  text: string
+  href: string
+  icon: string
+  header?: string | boolean
+}
+
+interface Site {
+  author: {
+    name: string
+    email: string
+    link: string
+  }
+  url: string
+  title: string
+  description: {
+    fr: string
+    en: string
+  }
+  keywords: string[]
+  socialLinks: SocialLink[]
+  header: {
+    logo: {
+      src: string
+      alt: string
+    }
+  }
+  footer: {
+    since: number
+  }
+}
+
+const siteConfig: Site = {
+  author: {
+    name: 'Maxence Maireaux',
+    email: 'maxence@maireaux.fr',
+    link: 'https://maxence.maireaux.fr',
   },
-  email: 'maxence@maireaux.fr',
+  url: 'https://maxence.maireaux.fr',
+  title: 'Maxence Maireaux',
+  description: {
+    fr: "VP Engineering le jour, Indie Hacker la nuit. J'explore la tech, le produit et la culture engineering.",
+    en: 'VP of Engineering by day, Indie Hacker by night. I write about engineering leadership, tooling, and building products.',
+  },
+  keywords: ['Blog', 'Maxence Maireaux', 'Engineering', 'Tech', 'Product', 'Indie Hacker'],
   socialLinks: [
     {
       text: 'GitHub',
@@ -22,7 +57,7 @@ export const siteConfig = {
       header: 'i-ri-twitter-x-line',
     },
     {
-      text: 'Linkedin',
+      text: 'LinkedIn',
       href: 'https://www.linkedin.com/in/maxencemaireaux/',
       icon: 'i-simple-icons-linkedin',
     },
@@ -30,62 +65,11 @@ export const siteConfig = {
   header: {
     logo: {
       src: '/favicon.ico',
-      alt: 'Logo Image',
+      alt: 'Maxence Maireaux',
     },
-    navLinks: [
-      {
-        text: 'Blog',
-        href: '/blog',
-      },
-      // {
-      //   text: 'Notes',
-      //   href: '/blog/notes',
-      // },
-      // {
-      //   text: 'Talks',
-      //   href: '/blog/talks',
-      // },
-      {
-        text: 'Projects',
-        href: '/projects',
-      },
-    ],
-  },
-  page: {
-    blogLinks: [
-      {
-        text: 'Blog',
-        href: '/blog',
-      },
-      // {
-      //   text: 'Notes',
-      //   href: '/blog/notes',
-      // },
-      // {
-      //   text: 'Talks',
-      //   href: '/blog/talks',
-      // },
-    ],
   },
   footer: {
-    navLinks: [
-      // {
-      //   text: 'Posts Props',
-      //   href: '/posts-props',
-      // },
-      // {
-      //   text: 'Markdown Style',
-      //   href: '/md-style',
-      // },
-      // {
-      //   text: 'View on Astro',
-      //   href: 'https://astro.build/themes/details/vitesse-theme-for-astro/',
-      // },
-      // {
-      //   text: 'GitHub Repository',
-      //   href: 'https://github.com/kevinwong865/astro-theme-vitesse',
-      // },
-    ],
+    since: 2016,
   },
 }
 

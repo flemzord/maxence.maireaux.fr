@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "blog": "Blog",
+    "projects": "Projets"
+  },
+  "home": {
+    "title": "Maxence Maireaux",
+    "subtitle": "VP Engineering le jour, Indie Hacker la nuit",
+    "description": "Ancien ingénieur infra, aujourd'hui VP Engineering. J'explore la tech, le produit et la culture engineering.",
+    "findMeOn": "Retrouvez-moi sur",
+    "latestPosts": "Derniers articles",
+    "viewAllPosts": "Voir tous les articles →"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Tous les articles publiés sur le site.",
+    "latestTitle": "Derniers articles"
+  },
+  "projects": {
+    "title": "Projets",
+    "description": "Les projets dont je suis le plus fier."
+  },
+  "states": {
+    "empty": "Rien à afficher pour le moment."
+  },
+  "languageSwitcher": {
+    "label": "Langue"
+  }
+}

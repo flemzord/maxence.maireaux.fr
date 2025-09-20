@@ -49,6 +49,7 @@ export default defineConfig({
   safelist: [
     'i-ri-file-list-2-line',
     'i-carbon-campsite',
+    'i-carbon-rocket',
     'i-simple-icons-github',
     'i-simple-icons-x',
     'i-simple-icons-linkedin',
@@ -59,5 +60,9 @@ export default defineConfig({
     'i-simple-icons-sinaweibo',
     'i-ri-github-line',
     'i-ri-twitter-x-line',
+    'i-ri-rss-line',
+    'i-ri-menu-2-fill',
+    'i-ri-sun-line',
+    'i-ri-moon-line',
   ],
 })

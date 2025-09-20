@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "blog": "Blog",
+    "projects": "Projects"
+  },
+  "home": {
+    "title": "Maxence Maireaux",
+    "subtitle": "VP of Engineering by day, Indie Hacker by night",
+    "description": "Former infra engineer, now VP of Engineering. I write about engineering leadership, tooling, and building products.",
+    "findMeOn": "Find me on",
+    "latestPosts": "Latest posts",
+    "viewAllPosts": "View all posts →"
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "A complete list of blog posts published on the site.",
+    "latestTitle": "Latest posts"
+  },
+  "projects": {
+    "title": "Projects",
+    "description": "A selection of projects I am proud of."
+  },
+  "states": {
+    "empty": "Nothing here yet."
+  },
+  "languageSwitcher": {
+    "label": "Language"
+  }
+}

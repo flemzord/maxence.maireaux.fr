@@ -1,0 +1,265 @@
+---
+title: "GitHub Compliance: Automate Your Repository Compliance"
+date: 2025-09-15
+description: "Discover how to automate and maintain GitHub repository compliance with GitHub Compliance, an open-source CLI for standardizing configurations and strengthening security."
+tag: "GitHub"
+duration: "8 min"
+lang: en
+translationKey: github-compliance
+---
+
+Managing dozens or even hundreds of GitHub repositories can quickly become a nightmare, especially when it comes to maintaining consistency in security configurations and best practices. To address this challenge, I developed **[GitHub Compliance](https://github.com/flemzord/github-compliance)**, an open-source CLI that automates compliance verification and policy enforcement across your repositories.
+
+## The Problem: Configuration Jungle
+
+In a typical GitHub organization, you quickly end up with:
+- Inconsistent branch protections
+- Variable security configurations across teams
+- Different merge methods for each project
+- Misconfigured team permissions
+- Archived repositories that are still accessible
+
+Manually maintaining consistency across all these configurations is time-consuming and error-prone. That's where GitHub Compliance comes in.
+
+## An Automated and Flexible Solution
+
+GitHub Compliance is a command-line tool that automatically scans your repositories and checks their compliance against rules you define. More than just a reporting tool, it can also automatically fix detected discrepancies when run without `--dry-run` mode.
+
+### Main Control Points
+
+The tool currently checks five critical aspects:
+
+1. **Branch protection**: Ensures your main branches are protected with the right rules
+2. **Security analysis**: Verifies Dependabot, secret scanning, and code scanning recommendations are enabled
+3. **Merge methods**: Controls allowed merge strategies
+4. **Team permissions**: Validates team access to repositories and can remove individual collaborators
+5. **Archive management**: Identifies archived repositories requiring attention
+
+## Simple and Powerful Configuration
+
+Configuration is done via a YAML file (e.g., `.github/compliance.yml`). Here's a concrete example based on the reference configuration:
+
+```yaml
+version: 1
+
+defaults:
+  merge_methods:
+    allow_merge_commit: false
+    allow_squash_merge: true
+    allow_rebase_merge: false
+
+  branch_protection:
+    patterns: ["main", "master", "release/*"]
+    enforce_admins: true
+    required_reviews:
+      dismiss_stale_reviews: true
+      required_approving_review_count: 2
+      require_code_owner_reviews: true
+      require_last_push_approval: false
+    required_status_checks:
+      auto_discover: true
+      contexts: []
+      strict: true
+    restrictions:
+      teams: ["admin-team"]
+      users: []
+    allow_force_pushes: false
+    allow_deletions: false
+    required_conversation_resolution: true
+    lock_branch: false
+    allow_fork_syncing: false
+
+  security:
+    secret_scanning: "enabled"
+    secret_scanning_push_protection: "enabled"
+    dependabot_alerts: true
+    dependabot_updates: true
+    code_scanning_recommended: true
+
+  permissions:
+    remove_individual_collaborators: true
+    teams:
+      - team: "admin-team"
+        permission: "admin"
+      - team: "developers"
+        permission: "write"
+      - team: "reviewers"
+        permission: "triage"
+
+  archived_repos:
+    admin_team_only: true
+```
+
+### Repository-Specific Rules
+
+You can also define specific rules for certain repositories:
+
+```yaml
+rules:
+  - match:
+      repositories: ["frontend-*"]
+    apply:
+      branch_protection:
+        patterns: ["main", "staging"]
+        required_reviews:
+          required_approving_review_count: 1  # Fewer reviewers for frontend projects
+
+  - match:
+      repositories: ["backend-*", "*-api"]
+    apply:
+      security:
+        code_scanning_recommended: true
+        dependabot_updates: true
+```
+
+## Installation and CI/CD Integration
+
+Running the CLI is simple. Once the package is published, you can install it globally:
+
+```bash
+npm install -g @flemzord/github-compliance
+github-compliance-cli --config .github/compliance.yml --token $GITHUB_TOKEN --dry-run
+```
+
+In the meantime, you can run it directly from the repository using `npm run cli` or `npx`:
+
+```bash
+npm install
+npm run cli -- --config .github/compliance.yml --token $GITHUB_TOKEN --dry-run
+# or
+npx tsx src/cli.ts --config .github/compliance.yml --token $GITHUB_TOKEN --dry-run
+```
+
+And to integrate it into GitHub Actions:
+
+```yaml
+name: Compliance Check
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install -g @flemzord/github-compliance
+      - name: Run Compliance CLI
+        run: github-compliance-cli --config .github/compliance.yml --token ${{ secrets.COMPLIANCE_TOKEN }} --dry-run
+```
+
+### Execution Modes
+
+The CLI supports two main modes:
+
+- **Reporting mode** (`--dry-run`): Generates a detailed report without modifying repositories
+- **Fix mode** (without `--dry-run`): Automatically applies necessary corrections
+
+## Detailed and Actionable Reports
+
+The tool generates two types of reports:
+
+### JSON Report
+A structured report for integration with other tools:
+
+```json
+{
+  "scan_date": "2025-09-15T10:00:00Z",
+  "total_repositories": 45,
+  "compliant_repositories": 38,
+  "non_compliant_repositories": 7,
+  "violations": [
+    {
+      "repository": "my-api",
+      "rule": "branch_protection",
+      "branch": "main",
+      "expected": {
+        "required_reviews": 2
+      },
+      "actual": {
+        "required_reviews": 0
+      },
+      "severity": "high"
+    }
+  ]
+}
+```
+
+### Markdown Report
+A readable report directly in GitHub:
+
+```markdown
+# Compliance Report - 2025-09-15
+
+## Summary
+- ✅ Compliant repositories: 38/45 (84%)
+- ⚠️ Non-compliant repositories: 7
+
+## Violations by Severity
+- 🔴 High: 3
+- 🟡 Medium: 8
+- 🟢 Low: 2
+
+## Detailed Violations
+...
+```
+
+## Real-World Use Cases
+
+### 1. Post-Acquisition Standardization
+After acquiring a company, use the CLI to quickly align all new repositories to your standards.
+
+### 2. Regular Security Audits
+Schedule weekly scans to detect configuration drifts and maintain consistent security levels.
+
+### 3. Onboarding New Teams
+Ensure new projects respect your conventions and policies from the start.
+
+### 4. Regulatory Compliance
+Automatically document policy compliance for audit purposes.
+
+## Performance and Limits
+
+The CLI is designed to be performant:
+- **Parallel processing** of repositories
+- **Smart handling** of GitHub API rate limits
+- **Result caching** to avoid unnecessary calls
+- Supports up to **1000 repositories** per scan
+
+## Security and Permissions
+
+The CLI requires a GitHub token with the following permissions:
+- `repo`: To read and modify configurations
+- `admin:org`: To manage team permissions
+- `workflow`: To create non-compliance issues
+
+**Important**: Always use GitHub secrets to store your token and limit permissions to the strict minimum.
+
+## Roadmap and Contributions
+
+The project is actively maintained with new features in development:
+- npm package and standalone binary publication
+- GitHub Apps support for better permission management
+- Slack/Teams integration for notifications
+- Web dashboard to visualize compliance history
+- Custom rules support via plugins
+
+Contributions are welcome! Feel free to open an issue or PR on the [GitHub repository](https://github.com/flemzord/github-compliance).
+
+## Conclusion
+
+GitHub Compliance transforms repository compliance management from a tedious manual task into an automated and reliable process. Whether you're managing a small organization or hundreds of repositories, this tool helps you maintain high security and quality standards.
+
+Compliance automation isn't just about efficiency - it's also a way to free your teams to focus on what really matters: creating value rather than managing configurations.
+
+Try it today and join the community of users who have already simplified their GitHub management!

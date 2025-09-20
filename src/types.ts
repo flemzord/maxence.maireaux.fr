@@ -1,12 +1,33 @@
-import type { CollectionEntry } from 'astro:content'
+export interface Post {
+  slug: string;
+  title: string;
+  date: string;
+  description?: string;
+  tag?: string;
+  lang: string;
+  translationKey?: string;
+  content: string;
+}
 
-export type PostKey = 'blog'
+export interface MDXComponents {
+  a?: React.ComponentType<React.AnchorHTMLAttributes<HTMLAnchorElement>>;
+  pre?: React.ComponentType<React.HTMLAttributes<HTMLPreElement>>;
+  code?: React.ComponentType<React.HTMLAttributes<HTMLElement>>;
+  [key: string]: React.ComponentType<any> | undefined;
+}
 
-export type CollectionPosts = CollectionEntry<PostKey>
+export interface NavigationLink {
+  id: string;
+  text: string;
+  href: string;
+}
 
-export type Pages = 'pages'
-
-export type CollectionPages = CollectionEntry<Pages>
+export interface SocialLink {
+  text: string;
+  href: string;
+  icon: string;
+  header?: boolean | string;
+}
 
 export type ProjectData = Array<{
   title: string
