@@ -21,7 +21,7 @@ pnpm install
 ## 🛠️ Développement
 
 ```bash
-# Lancer le serveur de développement (port 1977)
+# Lancer le serveur de développement
 pnpm dev
 
 # Lancer les tests de linting

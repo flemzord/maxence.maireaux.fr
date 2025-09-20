@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-- `pnpm dev` - Start development server on port 1977 (http://localhost:1977)
+- `pnpm dev` - Start development server 
 - `pnpm build` - Build for production (static export to /out)
 - `pnpm start` - Preview production build locally
 - `pnpm lint` - Run ESLint checks
@@ -74,7 +74,7 @@ This is a Next.js 15-based portfolio and blog site with full static export and i
 - The site is fully static and can be hosted on any static hosting service
 
 ### Development Notes
-- Server runs on port 1977 (configured in package.json)
+- Server runs on port
 - UnoCSS integrated via webpack plugin
 - Analytics tracking with Tinylytics
 - All blog posts should have matching translations with translationKey frontmatter
