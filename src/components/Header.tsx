@@ -80,7 +80,7 @@ export default function Header({ locale }: HeaderProps) {
     <>
       <header
         className={`fixed top-0 z-50 w-full h-15 sm:h-20 container-sm flex justify-between items-center transition-all duration-300 ${
-          scrollState.isScrolled ? 'backdrop-blur-md bg-white/90 dark:bg-gray-900/90 shadow-sm' : 'bg-transparent'
+          scrollState.isScrolled ? 'backdrop-blur-xl bg-white/95 dark:bg-gray-900/95 shadow-lg border-b border-gray-200/50 dark:border-gray-700/50' : 'bg-transparent'
         } ${scrollState.isHidden ? '-translate-y-full' : 'translate-y-0'}`}
       >
         <div className="flex items-center h-full">

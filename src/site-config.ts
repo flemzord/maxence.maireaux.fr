@@ -39,7 +39,7 @@ const siteConfig: Site = {
   url: 'https://maxence.maireaux.fr',
   title: 'Maxence Maireaux',
   description: {
-    fr: "VP Engineering le jour, Indie Hacker la nuit. J'explore la tech, le produit et la culture engineering.",
+    fr: "VP of Engineering le jour, Indie Hacker la nuit. J'explore la tech, le produit et la culture engineering.",
     en: 'VP of Engineering by day, Indie Hacker by night. I write about engineering leadership, tooling, and building products.',
   },
   keywords: ['Blog', 'Maxence Maireaux', 'Engineering', 'Tech', 'Product', 'Indie Hacker'],

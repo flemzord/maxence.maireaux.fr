@@ -66,6 +66,23 @@ export default async function LocaleLayout({
               const supportedLang = ['fr', 'en'].includes(browserLang) ? browserLang : 'fr';
               window.location.replace('/' + supportedLang + window.location.pathname);
             }
+            
+            // Handle unhandled promise rejections
+            window.addEventListener('unhandledrejection', function(event) {
+              if (event.reason && event.reason.toString().includes('Event')) {
+                event.preventDefault();
+              }
+            });
+            
+            // Handle link preload errors
+            document.addEventListener('DOMContentLoaded', function() {
+              const links = document.querySelectorAll('link[rel="preload"]');
+              links.forEach(link => {
+                link.addEventListener('error', function(e) {
+                  e.preventDefault();
+                });
+              });
+            });
           `}
         </Script>
       </head>
@@ -83,10 +100,6 @@ export default async function LocaleLayout({
             </div>
           </NextIntlClientProvider>
         </ErrorBoundary>
-        <Script
-          src="https://tinylytics.app/embed/K8VSZX9CKEUxD8rJu4tN.js"
-          defer
-        />
       </body>
     </html>
   );
