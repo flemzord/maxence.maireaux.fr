@@ -85,6 +85,12 @@ export default async function LocaleLayout({
             });
           `}
         </Script>
+        <Script
+          defer
+          src="https://tracker.hakanai.io/hakanai.min.js"
+          data-site="c4a3f1ba-4292-47f7-8e07-76d649e0d51a"
+          data-link-tracking="true"
+        />
       </head>
       <body className="font-sans bg-main text-main">
         <ErrorBoundary>
