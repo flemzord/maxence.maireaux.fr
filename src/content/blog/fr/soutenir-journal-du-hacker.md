@@ -28,7 +28,7 @@ Mais cette dette technique pose des problèmes concrets :
 
 ## Notre proposition : un "Refresh" collaboratif
 
-Avec [Olivier Bonvalet](https://bsky.app/profile/bool.fr), nous souhaitons proposer notre aide pour moderniser la stack technique du Journal du Hacker. Voici ce que nous pourrions apporter :
+[Olivier Bonvalet](https://bsky.app/profile/bool.fr) et [Moi](https://bsky.app/profile/flemzord.fr), nous souhaitons proposer notre aide pour moderniser la stack technique du Journal du Hacker. Voici ce que nous pourrions apporter :
 
 ### Modernisation progressive
 - Migration vers une version récente de Debian
