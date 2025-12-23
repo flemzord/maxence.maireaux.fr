@@ -14,9 +14,9 @@ export async function generateStaticParams() {
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ locale: Locale }> }
+  { params }: { params: Promise<{ locale: string }> }
 ) {
-  const { locale } = await params;
+  const { locale } = await params as { locale: Locale };
   const posts = await getAllPosts(locale);
   const siteUrl = 'https://maxence.maireaux.fr';
 

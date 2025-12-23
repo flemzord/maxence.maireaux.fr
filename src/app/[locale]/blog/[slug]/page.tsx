@@ -9,8 +9,8 @@ import { setRequestLocale } from 'next-intl/server';
 import { formatFullDate } from '@/lib/date';
 import { Suspense } from 'react';
 
-export async function generateStaticParams({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = await params;
+export async function generateStaticParams({ params }: { params: { locale: string; slug: string } }) {
+  const locale = params.locale as Locale;
   const posts = await getAllPosts(locale);
   return posts.map((post) => ({
     slug: post.slug,
