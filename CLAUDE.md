@@ -4,19 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-- `pnpm dev` - Start development server 
-- `pnpm build` - Build for production (static export to /out)
-- `pnpm start` - Preview production build locally
-- `pnpm lint` - Run ESLint checks
-- `pnpm lint:fix` - Auto-fix ESLint issues
-- `pnpm release` - Create a new release with bumpp
+- `bun dev` - Start development server
+- `bun run build` - Build for production (static export to /out)
+- `bun start` - Preview production build locally
+- `bun lint` - Run ESLint checks
+- `bun lint:fix` - Auto-fix ESLint issues
+- `bun release` - Create a new release with bumpp
 
 ## Architecture Overview
 
-This is a Next.js 15-based portfolio and blog site with full static export and internationalization.
+This is a Next.js 16-based portfolio and blog site with full static export and internationalization.
 
 ### Core Stack
-- **Next.js 15** - React framework with App Router and static export
+- **Next.js 16** - React framework with App Router and static export
 - **React 19** - UI components
 - **TypeScript** - Full type safety
 - **UnoCSS** - Atomic CSS framework with custom shortcuts and themes
@@ -69,7 +69,8 @@ This is a Next.js 15-based portfolio and blog site with full static export and i
 
 ### Important Notes
 - All pages must use `setRequestLocale(locale)` for static generation
-- Dynamic params in Next.js 15 are Promises (must await them)
+- Dynamic params in Next.js 16 are Promises in pages/layouts (must await them)
+- In `generateStaticParams`, parent params are passed as plain objects (not Promises)
 - RSS feeds are generated as static routes with generateStaticParams
 - The site is fully static and can be hosted on any static hosting service
 
